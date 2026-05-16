@@ -1,20 +1,13 @@
-import { useState, useEffect } from 'react';
 import VotingDemo from './components/VotingDemo';
+import ScrollProgress from './components/ScrollProgress';
+import ThemeToggle from './components/ThemeToggle';
+import AnimatedCounter from './components/AnimatedCounter';
 import './App.css';
 
 function App() {
-  const [voteCount, setVoteCount] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Simulate live activity for the stat counter
-      setVoteCount(prev => prev + Math.floor(Math.random() * 3));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="App">
+      <ScrollProgress />
       {/* Navigation */}
       <nav className="nav">
         <div className="nav-inner">
@@ -24,6 +17,7 @@ function App() {
             <li><a href="#features">Features</a></li>
             <li><a href="https://github.com">GitHub</a></li>
           </ul>
+          <ThemeToggle />
         </div>
       </nav>
 
@@ -52,11 +46,11 @@ function App() {
         </div>
         <div className="stats-bar">
           <div className="stat-item">
-            <div className="stat-number">2,847</div>
+            <div className="stat-number"><AnimatedCounter end={2847} /></div>
             <div className="stat-label">Polls Created</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">{12_430 + voteCount}</div>
+            <div className="stat-number"><AnimatedCounter end={12430} />+</div>
             <div className="stat-label">Votes Cast</div>
           </div>
           <div className="stat-item">
